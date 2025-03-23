@@ -68,9 +68,10 @@ Project demo :- [IPL victory predictor using python](https://youtu.be/t63T4-ZvMh
 
 🔥🔥 To contribute, simply make a pull request 📥 with your awesome additions or improvements. I'll personally review it and gladly accept it if it meets the project's standards. ✅👍
 
-## Authors
+## Contribution
 
-- [@Aditya Wadkar](https://www.github.com/AdityaWadkar)
+-Monu
+
 
 
 🌟 Don't forget to give this repository a star if you found it helpful! 🌟
