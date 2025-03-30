@@ -1,7 +1,7 @@
 import base64
 import streamlit as st
 import pickle
-# from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score
 import pandas as pd
 @st.cache_data
 def get_img_as_base64(file):
@@ -39,23 +39,25 @@ right: 2rem;
 }}
 </style>
 """
-teams =['--- select ---',
-        'Sunrisers Hyderabad',
-        'Mumbai Indians',
-        'Kolkata Knight Riders',
-        'Royal Challengers Bangalore',
-        'Kings XI Punjab',
-        'Chennai Super Kings',
-        'Rajasthan Royals',
-        'Delhi Capitals']
-cities =['Bangalore', 'Hyderabad', 'Kolkata', 'Mumbai', 'Visakhapatnam',
-       'Indore', 'Durban', 'Chandigarh', 'Delhi', 'Dharamsala',
-       'Ahmedabad', 'Chennai', 'Ranchi', 'Nagpur', 'Mohali', 'Pune',
-       'Bengaluru', 'Jaipur', 'Port Elizabeth', 'Centurion', 'Raipur',
-       'Sharjah', 'Cuttack', 'Johannesburg', 'Cape Town', 'East London',
-       'Abu Dhabi', 'Kimberley', 'Bloemfontein']
+teams =['--- select ---','Delhi Capitals', 'Rajasthan Royals', 'Chennai Super Kings',
+       'Mumbai Indians', 'Sunrisers Hyderabad', 'Kolkata Knight Riders',
+       'Royal Challengers Bangalore', 'Kings XI Punjab']
 
-pipe = pickle.load(open('pipe.pkl','rb'))
+cities =['Mumbai', 'Kolkata', 'Ahmedabad', 'Hyderabad', 'Delhi',
+       'Visakhapatnam', 'Centurion', 'Port Elizabeth', 'Bangalore',
+       'Dharamsala', 'Jaipur', 'Raipur', 'Sharjah', 'Nagpur', 'Chennai',
+       'Durban', 'Abu Dhabi', 'Indore', 'Pune', 'Bengaluru', 'Chandigarh',
+       'Cuttack', 'East London', 'Mohali', 'Johannesburg', 'Ranchi',
+       'Cape Town', 'Kimberley', 'Bloemfontein']
+
+# pipe = pickle.load(open('pipe.pkl','rb'))
+import os
+
+if not os.path.exists('pipe.pkl'):
+    st.header("Model file 'pipe.pkl' not found. Please check the path.")
+else:
+    pipe = pickle.load(open('pipe.pkl', 'rb'))
+
 
 st.markdown(page_bg_img, unsafe_allow_html=True)
 st.markdown("""
@@ -96,20 +98,23 @@ if st.button('Predict Winning Probability'):
         wickets = 10-wickets
         crr = score/overs
         rrr = runs_left/(balls_left/6)
+        
     
         input_data = pd.DataFrame({'batting_team':[batting_team],'bowling_team':[bowling_team],
                          'city':[seleted_city],'runs_left':[runs_left],'balls_left':[balls_left],
                          'wickets_remaining':[wickets],'total_runs_x':[target],'crr':[crr],'rrr':[rrr]})
-       
-        
+        print(input_data)
+        st.header("ok till her")
+
         result = pipe.predict_proba(input_data)
-    
+
+        print(result)
         loss = result[0][0]
         win =  result[0][1]
         st.header(batting_team + " = "+str(round(win*100)) + "%")
         st.header(bowling_team + " = "+str(round(loss*100)) + "%")
-    except:
-        st.header("Some error occured.. Please check you inputs !!")
+    except Exception as e:
+        st.header(e, "Some error occured.. Please check you inputs !!")
 
 
 
