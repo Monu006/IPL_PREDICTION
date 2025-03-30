@@ -10,14 +10,15 @@ def get_img_as_base64(file):
     return base64.b64encode(data).decode()
 
 
-img = get_img_as_base64("background.jpg")
+img = get_img_as_base64("bg.jpg")
 # data:image/png;base64,{img}
+
 page_bg_img = f"""
 <style>
 [data-testid="stAppViewContainer"] > .main {{
 background-image: url("data:image/png;base64,{img}");
 width: 100%;
-height:100%
+height:100%;
 background-repeat: no-repeat;
 background-attachment: fixed;
 background-size: cover;
@@ -38,6 +39,7 @@ background: rgba(0,0,0,0);
 right: 2rem;
 }}
 </style>
+
 """
 teams =['--- select ---','Delhi Capitals', 'Rajasthan Royals', 'Chennai Super Kings',
        'Mumbai Indians', 'Sunrisers Hyderabad', 'Kolkata Knight Riders',
@@ -46,7 +48,7 @@ teams =['--- select ---','Delhi Capitals', 'Rajasthan Royals', 'Chennai Super Ki
 cities =['Mumbai', 'Kolkata', 'Ahmedabad', 'Hyderabad', 'Delhi',
        'Visakhapatnam', 'Centurion', 'Port Elizabeth', 'Bangalore',
        'Dharamsala', 'Jaipur', 'Raipur', 'Sharjah', 'Nagpur', 'Chennai',
-       'Durban', 'Abu Dhabi', 'Indore', 'Pune', 'Bengaluru', 'Chandigarh',
+       'Durban', 'Abu Dhabi', 'Indore', 'Pune', 'Chandigarh',
        'Cuttack', 'East London', 'Mohali', 'Johannesburg', 'Ranchi',
        'Cape Town', 'Kimberley', 'Bloemfontein']
 
@@ -55,6 +57,7 @@ import os
 
 if not os.path.exists('pipe.pkl'):
     st.header("Model file 'pipe.pkl' not found. Please check the path.")
+    st.stop()
 else:
     pipe = pickle.load(open('pipe.pkl', 'rb'))
 
@@ -87,9 +90,11 @@ col1,col2,col3 = st.columns(3)
 with col1:
     score = st.number_input('Score')
 with col2:
-    overs = st.number_input("Over Completed")
+    # overs = st.number_input("Over Completed")
+    overs = st.number_input("Over Completed", min_value=0.0, max_value=20.0, step=0.1)
 with col3:
-    wickets = st.number_input("wicktes down")
+    # wickets = st.number_input("wicktes down")
+    wickets = st.number_input("Wickets Down", min_value=0, max_value=10, step=1)
 
 if st.button('Predict Winning Probability'):
     try:
@@ -104,7 +109,7 @@ if st.button('Predict Winning Probability'):
                          'city':[seleted_city],'runs_left':[runs_left],'balls_left':[balls_left],
                          'wickets_remaining':[wickets],'total_runs_x':[target],'crr':[crr],'rrr':[rrr]})
         print(input_data)
-        st.header("ok till her")
+        
 
         result = pipe.predict_proba(input_data)
 
@@ -114,7 +119,7 @@ if st.button('Predict Winning Probability'):
         st.header(batting_team + " = "+str(round(win*100)) + "%")
         st.header(bowling_team + " = "+str(round(loss*100)) + "%")
     except Exception as e:
-        st.header(e, "Some error occured.. Please check you inputs !!")
+        st.header(f"Some error occured. {e}. Please check you inputs !!")
 
 
 
