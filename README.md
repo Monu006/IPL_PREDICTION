@@ -57,11 +57,7 @@ Run the project:
 ```
 streamlit run main.py
 ```
-
-## 📺 YouTube Video
-Project demo :- [IPL victory predictor using python](https://youtu.be/t63T4-ZvMhM)
-
-<img src="https://github.com/AdityaWadkar/IPL-Winner-Predictor/assets/67093170/dc9a5d42-a0be-44ce-87eb-24bbc021745e">
+<img src="URL">
 
 ## 🤝 Contributing 
 🏆🏏 Contributions to the IPL Victory Predictor project are highly appreciated! If you're passionate about cricket and data analysis, we'd love to have you on board. 🤝🌟✨
