@@ -10,7 +10,7 @@
 ## 📖 Introduction
 The IPL Victory Predictor project is a powerful tool that harnesses the power of machine learning to forecast the outcome of matches in the Indian Premier League (IPL) 📈🏆. With its rich dataset containing information on every ball thrown from 2008 to 2021, this project aims to provide cricket enthusiasts, data analysts, and team strategists with valuable insights into team performance and factors influencing victory. 💪📊
 
-Furthermore, the project includes a YouTube video 🎥 that showcases a live demonstration of the IPL Victory Predictor in action as well as steps by step explanation about source code. This video serves as a comprehensive guide, walking users through the functionalities of the application and highlighting its features and capabilities. 📺🎬
+Furthermore, the project includes a live demonstration of the IPL Victory Predictor in action as well as steps by step explanation about source code. This video serves as a comprehensive guide, walking users through the functionalities of the application and highlighting its features and capabilities. 📺🎬
 
 Whether you're a cricket fanatic, a data enthusiast, or simply curious about the power of machine learning, the IPL Victory Predictor project promises an exciting journey into the realm of cricket analysis and prediction. So, dive in, explore the possibilities, and let the numbers guide you towards unraveling the mysteries of the IPL! 🏏🔮
 
