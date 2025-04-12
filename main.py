@@ -10,12 +10,16 @@ def get_img_as_base64(file):
     return base64.b64encode(data).decode()
 
 
-img = get_img_as_base64("bg.jpg")
+img = get_img_as_base64("b.jpg")
 # data:image/png;base64,{img}
 
+
 page_bg_img = f"""
+
 <style>
-[data-testid="stAppViewContainer"] > .main {{
+
+
+[data-testid="stAppViewContainer"] {{
 background-image: url("data:image/png;base64,{img}");
 width: 100%;
 height:100%;
@@ -31,6 +35,7 @@ background-repeat: no-repeat;
 background-attachment: fixed;
 }}
 
+
 [data-testid="stHeader"] {{
 background: rgba(0,0,0,0);
 }}
@@ -38,9 +43,13 @@ background: rgba(0,0,0,0);
 [data-testid="stToolbar"] {{
 right: 2rem;
 }}
+
 </style>
 
 """
+
+st.markdown(page_bg_img, unsafe_allow_html=True)
+
 teams =['--- select ---','Delhi Capitals', 'Rajasthan Royals', 'Chennai Super Kings',
        'Mumbai Indians', 'Sunrisers Hyderabad', 'Kolkata Knight Riders',
        'Royal Challengers Bangalore', 'Kings XI Punjab']
